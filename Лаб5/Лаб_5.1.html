@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <script>
+            function drawRectangle(x, y, width, height)
+            {
+                x = Number(x);
+                y = Number(y);
+                width = Number(width);
+                height = Number(height);
+
+                var canvas = document.getElementById('canvas');
+                var ctx = canvas.getContext('2d');
+                
+                ctx.lineWidth = 5;
+
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0,0,600,600);
+
+                ctx.fillStyle = 'black';
+                ctx.strokeRect(0,0,600,600);
+
+                ctx.strokeStyle = 'blue'
+                ctx.beginPath();
+                ctx.moveTo(x,y);
+                ctx.lineTo(x, y + height);
+                ctx.lineTo(x + width,y + height);
+                ctx.lineTo(x + width,y);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.fillStyle = 'blue'
+                ctx.fill();
+                ctx.strokeStyle = 'black'
+            }
+        </script>
+    </head>
+    <body onload="drawRectangle()">
+        <canvas id="canvas" width="600" height="600">
+        </canvas>
+        <br>
+        <input type="button" value="Draw" 
+        onclick="drawRectangle(
+            document.getElementById('x').value,
+            document.getElementById('y').value,
+            document.getElementById('width').value,
+            document.getElementById('height').value
+            )"/>
+        <br>
+        x:<input id="x" type="number" min="0" max="600" step="50" value="0">
+        y:<input id="y" type="number" min="0" max="600" step="50" value="0">
+        <br>
+        width:<input id="width" type="number" min="0" max="600" step="50" value="100">
+        heigth<input id="height" type="number" min="0" max="600" step="50" value="100">
+    </body>
+</html>
