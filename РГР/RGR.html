@@ -1,0 +1,118 @@
+<html>
+<head>
+  <title>РГР (ПИ801 Мауэр Анна Андреевна)</title>
+
+  <script>
+    function showDescription() {
+
+      var categoryField = document.getElementById("category-input").value;
+
+      if (categoryField === "A") {
+        alert ('Мотоциклы');
+      } else if (categoryField === "A1") {
+        alert('Легкие мотоциклы');
+      } else if (categoryField === "B") {
+        alert('Легковые автомобили, небольшие грузовики (до 3,5 тонн)');
+      } else if (categoryField === "BE") {
+        alert('Легковые автомобили с прицепом');
+      } else if (categoryField === "B1") {
+        alert('Трициклы');
+      } else if (categoryField === "C") {
+        alert('Грузовые автомобили (от 3,5 тонн)');
+      } else if (categoryField === "CE") {
+        alert('Грузовые автомобили с прицепом');
+      } else if (categoryField === "C1") {
+        alert('Средние грузовики (от 3,5 до 7,5 тонн)');
+      } else if (categoryField === "C1E") {
+        alert('Средние грузовики с прицепом');
+      } else if (categoryField === "D") {
+        alert('Автобусы');
+      } else if (categoryField === "DE") {
+        alert('Автобусы с прицепом');
+      } else if (categoryField === "D1") {
+        alert('Небольшие автобусы');
+      } else if (categoryField === "D1E") {
+        alert('Небольшие автобусы с прицепом');
+      } else if (categoryField === "M") {
+        alert('Мопеды');
+      } else if (categoryField === "Tm") {
+        alert('Трамваи');
+      } else if (categoryField === "Tb") {
+        alert('Троллейбусы');
+      } else {
+        alert('Нет такой категории (проверьте раскладку)');
+      }
+
+    }
+
+
+    function timeValidCheck(timeBox) {
+
+      var time = timeBox.value;
+      var message = document.getElementById('messageBox');
+      var symbol = document.getElementById('symbolBox');
+
+      var timeCorrectFormat = /^[0-9]{2}[\:\/][0-9]{2}[\:\/][0-9]{2}$/;    //correct format XX:XX:XX
+
+      if (time.match(timeCorrectFormat)) {
+        var timeArr = time.split(":", 3);
+        var h = timeArr[0];
+        var m = timeArr[1];
+        var s = timeArr[2];
+        if ((h > 23) || (m > 59) || (s > 59)) {
+          symbol.classList.remove('yes');
+          symbol.classList.add('no');
+          message.innerHTML = "Диапазон значений:<br>Часы: от 0 до 23<br>Минуты: от 0 до 59<br>Секунды: от 0 до 59";
+          message.style.color = "red";
+        } else {
+          message.innerHTML = "";
+          symbol.classList.remove('no');
+          symbol.classList.add('yes');
+        }
+      } else {
+        symbol.classList.remove('yes');
+        symbol.classList.add('no');
+        message.innerHTML = "Введите время в формате ЧЧ:ММ:СС (без отрицательных значений)";
+        message.style.color = "red";
+      }
+    }
+  </script>
+
+  <style>
+    .symb {
+      font-size: 18px;
+      display: inline-block;
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+  
+    .yes:before {
+      content: "\2714";
+      color: green;
+    }
+  
+    .no:before {
+      content: "\2718";
+      color: red;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    Введите категорию:
+    <input type="text" id="category-input" value="">
+    <br>
+    <button onclick="showDescription()">Показать транспортные средства</button>
+  </div>
+  <br>
+  <div>
+    Введите время:
+    <input type="text" id="timeInputBox" onkeyup="timeValidCheck(this)" />
+    <span class="symb" id="symbolBox"></span>
+  </div>
+  <span id="messageBox"></span>
+</body>
+</html>

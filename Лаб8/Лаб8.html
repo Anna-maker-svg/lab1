@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>Практикум по web-разработке (ПИ801 Мауэр Анна Андреевна)</title>
+
+  <script>
+    var canvas;
+    var ctx;
+    var color = 'red'
+
+    function init() {
+      canvas = document.getElementById('canvas');
+      ctx = canvas.getContext('2d');
+      ctx.strokeStyle = 'black';
+      ctx.strokeRect(0, 0, 640, 480);
+      document.getElementById('mycolor').style.backgroundColor = color;
+      document.addEventListener("keydown", changeColor);
+      document.addEventListener("mousedown", putLine);
+      document.addEventListener("mousemove", showXY);
+    }
+    function changeColor(event) {
+      if (event.keyCode == 49) {
+        color = 'red';
+        document.getElementById('mycolor').style.backgroundColor = color;
+        document.getElementById('mycolor').value = "red"
+      }
+      if (event.keyCode == 50) {
+        color = 'green';
+        document.getElementById('mycolor').style.backgroundColor = color;
+        document.getElementById('mycolor').value = "green"
+      }
+      if (event.keyCode == 51) {
+        color = 'blue';
+        document.getElementById('mycolor').style.backgroundColor = color;
+        document.getElementById('mycolor').value = "blue"
+      }
+    }
+    function putLine(event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = color;
+      ctx.stroke();
+    }
+    function showXY(event) {
+      var x = event.offsetX;
+      var y = event.offsetY;
+      document.getElementById("x").value = "x=" + x;
+      document.getElementById("y").value = "y=" + y;
+    }
+  </script>
+</head>
+
+<body onload="init()">
+    <input type="text" id="x" />
+    <input type="text" id="y" />
+    <input type="text" id="mycolor" value="red"/>
+    <br>
+    <canvas id="canvas" width="640" height="480"></canvas>
+</body>
+</html>
